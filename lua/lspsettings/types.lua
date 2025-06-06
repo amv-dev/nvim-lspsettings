@@ -1,0 +1,11 @@
+---@class lspsettings.types.config
+---@field paths string|string[]?
+---@field auto_restart boolean?:true Do automatic LSP server restart when settings are changed
+---@field on_init fun(server_name: string, settings: table): nil?
+---@field on_update fun(server_name: string, settings: table): nil?
+
+---@class lspsettings.default_config
+---@field paths string|string[]
+---@field auto_restart boolean Do automatic LSP server restart when settings are changed. Default: true
+---@field on_init fun(server_name: string, settings: table): nil
+---@field on_update fun(server_name: string, settings: table): nil
