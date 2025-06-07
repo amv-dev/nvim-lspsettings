@@ -1,0 +1,93 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `flow`",
+    "properties": {
+        "flow.enabled": {
+            "scope": "resource",
+            "type": "boolean",
+            "default": true,
+            "description": "Is flow enabled"
+        },
+        "flow.useNPMPackagedFlow": {
+            "scope": "resource",
+            "type": "boolean",
+            "default": true,
+            "description": "Support using flow through your node_modules folder, WARNING: Checking this box is a security risk. When you open a project we will immediately run code contained within it."
+        },
+        "flow.pathToFlow": {
+            "scope": "resource",
+            "type": "string",
+            "default": "flow",
+            "description": "Absolute path to flow binary. Special var ${workspaceFolder} or ${flowconfigDir} can be used in path (NOTE: in windows you can use '/' and can omit '.cmd' in path)"
+        },
+        "flow.useBundledFlow": {
+            "scope": "resource",
+            "type": "boolean",
+            "default": true,
+            "description": "If true will use flow bundled with this plugin if nothing works"
+        },
+        "flow.showUncovered": {
+            "scope": "resource",
+            "type": "boolean",
+            "default": false,
+            "description": "If true will show uncovered code by default"
+        },
+        "flow.coverageSeverity": {
+            "scope": "resource",
+            "type": "string",
+            "enum": [
+                "error",
+                "warn",
+                "info"
+            ],
+            "default": "info",
+            "description": "Type coverage diagnostic severity"
+        },
+        "flow.lazyMode": {
+            "scope": "resource",
+            "type": "string",
+            "default": null,
+            "description": "Set value to enable flow lazy mode"
+        },
+        "flow.stopFlowOnExit": {
+            "scope": "resource",
+            "type": "boolean",
+            "default": true,
+            "description": "Stop Flow on Exit"
+        },
+        "flow.useCodeSnippetOnFunctionSuggest": {
+            "scope": "resource",
+            "type": "boolean",
+            "default": true,
+            "description": "Complete functions with their parameter signature."
+        },
+        "flow.logLevel": {
+            "scope": "resource",
+            "type": "string",
+            "enum": [
+                "error",
+                "warn",
+                "info",
+                "trace"
+            ],
+            "default": "info",
+            "description": "Log level for output panel logs"
+        },
+        "flow.trace.server": {
+            "scope": "window",
+            "anyOf": [
+                {
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "messages",
+                        "verbose"
+                    ],
+                    "default": "off"
+                }
+            ],
+            "default": "off",
+            "description": "Traces the communication between VSCode and the flow lsp service."
+        }
+    }
+}

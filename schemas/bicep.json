@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `bicep`",
+    "properties": {
+        "bicep.decompileOnPaste": {
+            "type": "boolean",
+            "description": "Automatically convert pasted JSON values, JSON ARM templates or resources from a JSON ARM template into Bicep (use Undo to revert)",
+            "default": true
+        },
+        "bicep.enableOutputTimestamps": {
+            "type": "boolean",
+            "description": "Prepend each line displayed in the Bicep Operations output channel with a timestamp.",
+            "default": true,
+            "$comment": "This is interpreted by vscode-azuretools package and the name has to be in the following format: <extensionConfigurationPrefix>.enableOutputTimestamps"
+        },
+        "bicep.suppressedWarnings": {
+            "type": "array",
+            "description": "Warnings that are being suppressed because a 'Don't show again' button was pressed. Remove items to reset.",
+            "default": [],
+            "items": {
+                "type": "string"
+            }
+        },
+        "bicep.enableSurveys": {
+            "type": "boolean",
+            "description": "Enable occasional surveys to collect feedback that helps us improve the Bicep extension.",
+            "default": true
+        },
+        "bicep.completions.getAllAccessibleAzureContainerRegistries": {
+            "type": "boolean",
+            "description": "When completing 'br:' module references, query Azure for all container registries accessible to the user (may be slow). If this option is off, only registries configured under moduleAliases in bicepconfig.json will be listed.",
+            "default": false
+        },
+        "bicep.trace.server": {
+            "type": "string",
+            "enum": [
+                "Off",
+                "Messages",
+                "Verbose"
+            ],
+            "default": "Off",
+            "description": "Configure tracing of messages sent to the Bicep language server.",
+            "scope": "window"
+        }
+    }
+}

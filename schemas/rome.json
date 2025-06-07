@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `rome`",
+    "properties": {
+        "rome_lsp.trace.server": {
+            "type": "string",
+            "scope": "window",
+            "enum": [
+                "off",
+                "messages",
+                "verbose"
+            ],
+            "enumDescriptions": [
+                "No traces",
+                "Error only",
+                "Full log"
+            ],
+            "default": "off",
+            "description": "Traces the communication between VS Code and the language server."
+        },
+        "rome.lspBin": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "default": null,
+            "markdownDescription": "The rome lsp server executable. If the path is relative, the workspace folder will be used as base path"
+        },
+        "rome.rename": {
+            "type": [
+                "boolean",
+                "null"
+            ],
+            "default": null,
+            "markdownDescription": "Enable/Disable Rome handling renames in the workspace. (Experimental)"
+        },
+        "rome.requireConfiguration": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "Require a Rome configuration file to enable syntax errors, formatting and linting. Requires Rome 12 or newer."
+        }
+    }
+}

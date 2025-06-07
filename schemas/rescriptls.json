@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `rescriptls`",
+    "properties": {
+        "rescript.settings.askToStartBuild": {
+            "scope": "language-overridable",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether you want the extension to prompt for autostarting a ReScript build if a project is opened with no build running."
+        },
+        "rescript.settings.inlayHints.enable": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable (experimental) inlay hints."
+        },
+        "rescript.settings.inlayHints.maxLength": {
+            "markdownDescription": "Maximum length of character for inlay hints. Set to null to have an unlimited length. Inlay hints that exceed the maximum length will not be shown.",
+            "default": 25,
+            "type": [
+                "null",
+                "integer"
+            ],
+            "minimum": 0
+        },
+        "rescript.settings.codeLens": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable (experimental) code lens for function definitions."
+        },
+        "rescript.settings.signatureHelp.enabled": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable signature help for function calls."
+        },
+        "rescript.settings.signatureHelp.forConstructorPayloads": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable signature help for variant constructor payloads."
+        },
+        "rescript.settings.incrementalTypechecking.enable": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable incremental type checking."
+        },
+        "rescript.settings.incrementalTypechecking.acrossFiles": {
+            "type": "boolean",
+            "default": false,
+            "description": "(beta/experimental) Enable incremental type checking across files, so that unsaved file A gets access to unsaved file B."
+        },
+        "rescript.settings.incrementalTypechecking.debugLogging": {
+            "type": "boolean",
+            "default": false,
+            "description": "(debug) Enable debug logging (ends up in the extension output)."
+        },
+        "rescript.settings.cache.projectConfig.enable": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable project config caching. Can speed up latency dramatically."
+        },
+        "rescript.settings.binaryPath": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "default": null,
+            "description": "Path to the directory where cross-platform ReScript binaries are. You can use it if you haven't or don't want to use the installed ReScript from node_modules in your project."
+        },
+        "rescript.settings.platformPath": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "default": null,
+            "description": "Path to the directory where platform-specific ReScript binaries are. You can use it if you haven't or don't want to use the installed ReScript from node_modules in your project."
+        }
+    }
+}

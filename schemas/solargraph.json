@@ -1,0 +1,174 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `solargraph`",
+    "properties": {
+        "solargraph.transport": {
+            "type": "string",
+            "default": "socket",
+            "enum": [
+                "socket",
+                "stdio",
+                "external"
+            ],
+            "description": "The type of transport to use."
+        },
+        "solargraph.externalServer": {
+            "type": "object",
+            "description": "The host and port to use for external transports. (Ignored for stdio and socket transports.)",
+            "properties": {
+                "host": {
+                    "type": "string",
+                    "default": "localhost"
+                },
+                "port": {
+                    "type": "integer",
+                    "default": 7658
+                }
+            },
+            "default": {
+                "host": "localhost",
+                "port": 7658
+            }
+        },
+        "solargraph.commandPath": {
+            "type": "string",
+            "default": "solargraph",
+            "description": "Path to the solargraph command.  Set this to an absolute path to select from multiple installed Ruby versions.",
+            "scope": "resource"
+        },
+        "solargraph.useBundler": {
+            "type": "boolean",
+            "description": "Use `bundle exec` to run solargraph. (If this is true, the solargraph.commandPath setting is ignored.)",
+            "default": false
+        },
+        "solargraph.bundlerPath": {
+            "type": "string",
+            "description": "Path to the bundle executable, defaults to 'bundle'. Needs to be an absolute path for the 'bundle' exec/shim",
+            "default": "bundle",
+            "scope": "resource"
+        },
+        "solargraph.checkGemVersion": {
+            "type": "boolean",
+            "description": "Automatically check if a new version of the Solargraph gem is available.",
+            "default": true,
+            "enum": [
+                true,
+                false
+            ]
+        },
+        "solargraph.completion": {
+            "type": [
+                "boolean"
+            ],
+            "description": "Enable completion",
+            "default": true,
+            "enum": [
+                true,
+                false
+            ]
+        },
+        "solargraph.hover": {
+            "type": [
+                "boolean"
+            ],
+            "description": "Enable hover",
+            "default": true,
+            "enum": [
+                true,
+                false
+            ]
+        },
+        "solargraph.diagnostics": {
+            "type": [
+                "boolean"
+            ],
+            "description": "Enable diagnostics",
+            "default": false,
+            "enum": [
+                true,
+                false
+            ]
+        },
+        "solargraph.autoformat": {
+            "type": [
+                "boolean"
+            ],
+            "description": "Enable automatic formatting while typing (WARNING: experimental)",
+            "default": false,
+            "enum": [
+                true,
+                false
+            ]
+        },
+        "solargraph.formatting": {
+            "type": [
+                "boolean"
+            ],
+            "description": "Enable document formatting",
+            "enum": [
+                true,
+                false
+            ],
+            "default": false
+        },
+        "solargraph.symbols": {
+            "type": [
+                "boolean"
+            ],
+            "description": "Enable symbols",
+            "enum": [
+                true,
+                false
+            ],
+            "default": true
+        },
+        "solargraph.definitions": {
+            "type": [
+                "boolean"
+            ],
+            "description": "Enable definitions (go to, etc.)",
+            "enum": [
+                true,
+                false
+            ],
+            "default": true
+        },
+        "solargraph.rename": {
+            "type": [
+                "boolean"
+            ],
+            "description": "Enable symbol renaming",
+            "enum": [
+                true,
+                false
+            ],
+            "default": true
+        },
+        "solargraph.references": {
+            "type": [
+                "boolean"
+            ],
+            "description": "Enable finding references",
+            "enum": [
+                true,
+                false
+            ],
+            "default": true
+        },
+        "solargraph.folding": {
+            "type": "boolean",
+            "description": "Enable folding ranges",
+            "default": true
+        },
+        "solargraph.logLevel": {
+            "type": "string",
+            "description": "Level of debug info to log. `warn` is least and `debug` is most.",
+            "enum": [
+                "warn",
+                "info",
+                "debug"
+            ],
+            "default": "warn"
+        }
+    }
+}

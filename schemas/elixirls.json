@@ -1,0 +1,174 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `elixirls`",
+    "properties": {
+        "elixirLS.autoBuild": {
+            "scope": "resource",
+            "type": "boolean",
+            "default": true,
+            "description": "Trigger ElixirLS build when code is saved"
+        },
+        "elixirLS.dialyzerEnabled": {
+            "scope": "resource",
+            "type": "boolean",
+            "default": true,
+            "description": "Run ElixirLS's rapid Dialyzer when code is saved"
+        },
+        "elixirLS.incrementalDialyzer": {
+            "scope": "resource",
+            "type": "boolean",
+            "default": true,
+            "description": "Use OTP incremental dialyzer (available on OTP 26+)"
+        },
+        "elixirLS.dialyzerWarnOpts": {
+            "scope": "resource",
+            "description": "Dialyzer options to enable or disable warnings - See Dialyzer's documentation for options. Note that the \"race_conditions\" option is unsupported",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "enum": [
+                    "no_return",
+                    "no_unused",
+                    "no_unknown",
+                    "no_improper_lists",
+                    "no_fun_app",
+                    "no_match",
+                    "no_opaque",
+                    "no_fail_call",
+                    "no_contracts",
+                    "no_behaviours",
+                    "no_undefined_callbacks",
+                    "unmatched_returns",
+                    "error_handling",
+                    "no_missing_calls",
+                    "specdiffs",
+                    "overspecs",
+                    "underspecs",
+                    "no_underspecs",
+                    "extra_return",
+                    "no_extra_return",
+                    "missing_return",
+                    "no_missing_return",
+                    "unknown",
+                    "overlapping_contract",
+                    "opaque_union",
+                    "no_opaque_union"
+                ]
+            },
+            "default": []
+        },
+        "elixirLS.dialyzerFormat": {
+            "scope": "resource",
+            "description": "Formatter to use for Dialyzer warnings",
+            "type": "string",
+            "enum": [
+                "dialyzer",
+                "dialyxir_short",
+                "dialyxir_long"
+            ],
+            "markdownEnumDescriptions": [
+                "Original Dialyzer format",
+                "Same as `mix dialyzer --format short`",
+                "Same as `mix dialyzer --format long`"
+            ],
+            "default": "dialyxir_long"
+        },
+        "elixirLS.envVariables": {
+            "scope": "resource",
+            "type": "object",
+            "description": "Environment variables to use for compilation",
+            "minLength": 0
+        },
+        "elixirLS.mixEnv": {
+            "scope": "resource",
+            "type": "string",
+            "description": "Mix environment to use for compilation",
+            "default": "test",
+            "minLength": 1
+        },
+        "elixirLS.mixTarget": {
+            "scope": "resource",
+            "type": "string",
+            "description": "Mix target to use for compilation",
+            "minLength": 0
+        },
+        "elixirLS.projectDir": {
+            "scope": "resource",
+            "type": "string",
+            "description": "Subdirectory containing Mix project if not in the project root",
+            "minLength": 0,
+            "default": ""
+        },
+        "elixirLS.stdlibSrcDir": {
+            "scope": "resource",
+            "type": "string",
+            "description": "Subdirectory where the Elixir stdlib resides to allow for source code lookup. E.g. /home/youruser/.asdf/installs/elixir/1.18.2",
+            "minLength": 0,
+            "default": ""
+        },
+        "elixirLS.useCurrentRootFolderAsProjectDir": {
+            "scope": "resource",
+            "type": "boolean",
+            "description": "Don't try to look for mix.exs in parent directories",
+            "default": false
+        },
+        "elixirLS.fetchDeps": {
+            "scope": "resource",
+            "type": "boolean",
+            "description": "Automatically fetch project dependencies when compiling.",
+            "default": false
+        },
+        "elixirLS.suggestSpecs": {
+            "scope": "resource",
+            "type": "boolean",
+            "description": "Suggest @spec annotations inline using Dialyzer's inferred success typings (Requires Dialyzer).",
+            "default": true
+        },
+        "elixirLS.trace.server": {
+            "scope": "window",
+            "type": "string",
+            "enum": [
+                "off",
+                "messages",
+                "verbose"
+            ],
+            "default": "off",
+            "description": "Traces the communication between VS Code and the Elixir language server."
+        },
+        "elixirLS.autoInsertRequiredAlias": {
+            "scope": "window",
+            "type": "boolean",
+            "description": "Enable auto-insert required alias. This is true (enabled) by default.",
+            "default": true
+        },
+        "elixirLS.signatureAfterComplete": {
+            "scope": "resource",
+            "type": "boolean",
+            "description": "Show signature help after confirming autocomplete.",
+            "default": true
+        },
+        "elixirLS.enableTestLenses": {
+            "scope": "resource",
+            "type": "boolean",
+            "description": "Show code lenses to run tests in terminal.",
+            "default": false
+        },
+        "elixirLS.additionalWatchedExtensions": {
+            "scope": "resource",
+            "type": "array",
+            "description": "Additional file types capable of triggering a build on change",
+            "uniqueItems": true,
+            "items": {
+                "type": "string"
+            },
+            "default": []
+        },
+        "elixirLS.languageServerOverridePath": {
+            "scope": "resource",
+            "type": "string",
+            "description": "Absolute path to alternative ElixirLS release that will override the packaged release",
+            "minLength": 0
+        }
+    }
+}

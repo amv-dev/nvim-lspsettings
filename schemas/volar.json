@@ -1,0 +1,173 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `volar`",
+    "properties": {
+        "vue.trace.server": {
+            "scope": "window",
+            "type": "string",
+            "enum": [
+                "off",
+                "messages",
+                "verbose"
+            ],
+            "default": "off",
+            "markdownDescription": "%configuration.trace.server%"
+        },
+        "vue.server.includeLanguages": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "default": [
+                "vue"
+            ],
+            "markdownDescription": "%configuration.server.includeLanguages%"
+        },
+        "vue.splitEditors.icon": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "%configuration.splitEditors.icon%"
+        },
+        "vue.splitEditors.layout.left": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "default": [
+                "script",
+                "scriptSetup",
+                "styles"
+            ],
+            "markdownDescription": "%configuration.splitEditors.layout.left%"
+        },
+        "vue.splitEditors.layout.right": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "default": [
+                "template",
+                "customBlocks"
+            ],
+            "markdownDescription": "%configuration.splitEditors.layout.right%"
+        },
+        "vue.codeActions.enabled": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%configuration.codeActions.enabled%"
+        },
+        "vue.codeActions.askNewComponentName": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%configuration.codeActions.askNewComponentName%"
+        },
+        "vue.codeLens.enabled": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%configuration.codeLens.enabled%"
+        },
+        "vue.complete.casing.tags": {
+            "type": "string",
+            "enum": [
+                "autoKebab",
+                "autoPascal",
+                "kebab",
+                "pascal"
+            ],
+            "enumDescriptions": [
+                "Auto Detect from Content (Fallback to <kebab-case> if detect failed)",
+                "Auto Detect from Content  (Fallback to <PascalCase> if detect failed)",
+                "<kebab-case>",
+                "<PascalCase>"
+            ],
+            "default": "autoPascal",
+            "markdownDescription": "%configuration.complete.casing.tags%"
+        },
+        "vue.complete.casing.props": {
+            "type": "string",
+            "enum": [
+                "autoKebab",
+                "autoCamel",
+                "kebab",
+                "camel"
+            ],
+            "enumDescriptions": [
+                "Auto Detect from Content (Fallback to :kebab-case=\"...\" if detect failed)",
+                "Auto Detect from Content (Fallback to :camelCase=\"...\" if detect failed)",
+                ":kebab-case=\"...\"",
+                ":camelCase=\"...\""
+            ],
+            "default": "autoKebab",
+            "markdownDescription": "%configuration.complete.casing.props%"
+        },
+        "vue.complete.defineAssignment": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%configuration.complete.defineAssignment%"
+        },
+        "vue.autoInsert.dotValue": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "%configuration.autoInsert.dotValue%"
+        },
+        "vue.autoInsert.bracketSpacing": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%configuration.autoInsert.bracketSpacing%"
+        },
+        "vue.inlayHints.destructuredProps": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "%configuration.inlayHints.destructuredProps%"
+        },
+        "vue.inlayHints.missingProps": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "%configuration.inlayHints.missingProps%"
+        },
+        "vue.inlayHints.inlineHandlerLeading": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "%configuration.inlayHints.inlineHandlerLeading%"
+        },
+        "vue.inlayHints.optionsWrapper": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "%configuration.inlayHints.optionsWrapper%"
+        },
+        "vue.inlayHints.vBindShorthand": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "%configuration.inlayHints.vBindShorthand%"
+        },
+        "vue.format.template.initialIndent": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%configuration.format.template.initialIndent%"
+        },
+        "vue.format.script.initialIndent": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "%configuration.format.script.initialIndent%"
+        },
+        "vue.format.style.initialIndent": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "%configuration.format.style.initialIndent%"
+        },
+        "vue.format.wrapAttributes": {
+            "type": "string",
+            "default": "auto",
+            "enum": [
+                "auto",
+                "force",
+                "force-aligned",
+                "force-expand-multiline",
+                "aligned-multiple",
+                "preserve",
+                "preserve-aligned"
+            ],
+            "markdownDescription": "%configuration.format.wrapAttributes%"
+        }
+    }
+}

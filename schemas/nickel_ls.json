@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `nickel_ls`",
+    "properties": {
+        "nls.server.path": {
+            "scope": "window",
+            "type": "string",
+            "default": "nls",
+            "description": "Path to nickel language server"
+        },
+        "nls.server.trace": {
+            "scope": "window",
+            "type": "string",
+            "description": "Enables performance tracing to the given file"
+        },
+        "nls.server.debugLog": {
+            "scope": "window",
+            "type": "boolean",
+            "default": false,
+            "description": "Logs the communication between VS Code and the language server."
+        }
+    }
+}

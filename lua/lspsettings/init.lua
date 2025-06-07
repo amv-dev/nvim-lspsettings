@@ -1,5 +1,6 @@
 local Config = require("lspsettings.config")
 local JsonLoader = require("lspsettings.loader")
+local Schemas = require("lspsettings.schemas")
 
 local M = {}
 
@@ -34,6 +35,10 @@ M.setup = function(opts)
             config.on_update(server_name, settings)
         end
     })
+
+    local schemas = Schemas:new()
+    schemas:load()
+    schemas:apply()
 end
 
 return M

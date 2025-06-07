@@ -1,0 +1,405 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `als`",
+    "properties": {
+        "ada.projectFile": {
+            "scope": "window",
+            "type": "string",
+            "default": null,
+            "markdownDescription": "GPR project file (*.gpr) for this workspace.\n\nIt is recommended to set this to a relative path starting at the root of the workspace.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists.",
+            "order": 0
+        },
+        "ada.gprConfigurationFile": {
+            "scope": "window",
+            "type": "string",
+            "default": null,
+            "markdownDescription": "GPR configuration file (*.cgpr) for this workspace.\n\nIt is recommended to set this to a relative path starting at the root of the workspace.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists.",
+            "order": 0
+        },
+        "ada.scenarioVariables": {
+            "scope": "window",
+            "type": "object",
+            "default": null,
+            "markdownDescription": "Scenario variables to apply to the GPR project file.\n\nThis value should be provided as an object where the property names are GPR scenario variables and the values are strings.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists.",
+            "patternProperties": {
+                ".*": {
+                    "type": "string"
+                }
+            },
+            "order": 1
+        },
+        "ada.defaultCharset": {
+            "scope": "window",
+            "type": "string",
+            "default": null,
+            "markdownDescription": "The character set that the Ada Language Server should use when reading files from disk.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists."
+        },
+        "ada.relocateBuildTree": {
+            "scope": "window",
+            "type": "string",
+            "default": null,
+            "markdownDescription": "The path to a directory used for out-of-tree builds. This feature is related to the [--relocate-build-tree GPRbuild command line switch](https://docs.adacore.com/gprbuild-docs/html/gprbuild_ug/building_with_gprbuild.html#switches).\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists."
+        },
+        "ada.rootDir": {
+            "scope": "window",
+            "type": "string",
+            "default": null,
+            "markdownDescription": "This setting must be used in conjunction with the `relocateBuildTree` setting.\n\nIt specifies the root directory for artifact relocation. It corresponds to the [--root-dir GPRbuild command line switch](https://docs.adacore.com/gprbuild-docs/html/gprbuild_ug/building_with_gprbuild.html#switches).\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists."
+        },
+        "ada.useGnatformat": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Enable GNATformat as the formatting provider for Ada source files.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.onTypeFormatting.indentOnly": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "If the VS Code `editor.formatOnType` setting is enabled, the Ada Language Server will format Ada code while it is being typed in the editor, in particular when a new line is typed.\n\nThis setting controls whether formatting should only perform the indentation of the new line (true) or also format the previous line (false).\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.showNotificationsOnErrors": {
+            "markdownDescription": "Whether to show error notifications in VS Code for failing LSP requests.",
+            "default": false,
+            "type": "boolean"
+        },
+        "ada.documentationStyle": {
+            "scope": "window",
+            "enum": [
+                "gnat",
+                "leading",
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: \"gnat\")"
+            ],
+            "markdownEnumDescriptions": [
+                "Default style, based on GNAT coding standard with some enhancements.",
+                "Documentation for the entities extracted from the comments before the entity declaration.",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `\"gnat\"`."
+            ],
+            "default": null,
+            "markdownDescription": "Controls the primary documentation style of entities.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `\"gnat\"`."
+        },
+        "ada.displayMethodAncestryOnNavigation": {
+            "scope": "window",
+            "enum": [
+                "never",
+                "usage_and_abstract_only",
+                "definition_only",
+                "always",
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                null,
+                null,
+                "Provided by .als.json (default: \"usage_and_abstract_only\")"
+            ],
+            "markdownEnumDescriptions": [
+                "Never list overriding and/or overridden subprograms.",
+                "List overriding and/or overridden subprograms on dispatching calls and on abstract subprogram declarations.",
+                "List overriding and/or overridden subprograms on declarations only.",
+                "Always list overriding and/or overridden subprograms when possible.",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `\"usage_and_abstract_only\"`."
+            ],
+            "default": null,
+            "markdownDescription": "Controls the policy for displaying overriding and overridden subprograms on navigation requests such as 'Go To Definition' or 'Go To Implementations'.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `\"usage_and_abstract_only\"`."
+        },
+        "ada.foldComments": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Controls whether comments should be folded like code blocks.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.namedNotationThreshold": {
+            "scope": "window",
+            "type": "integer",
+            "default": 3,
+            "markdownDescription": "Defines the number of parameters/components beyond which named notation is used for completion snippets.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `3`."
+        },
+        "ada.useCompletionSnippets": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Enable snippets in completion results (e.g. subprogram calls).\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.insertWithClauses": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Enable insertion of missing with-clauses when accepting completion for invisible symbols.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.renameInComments": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: false)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `false`."
+            ],
+            "default": null,
+            "markdownDescription": "Enable editing Ada comments to update references to an entity when it is being renamed.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `false`."
+        },
+        "ada.projectDiagnostics": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Controls whether or not the Ada Language Server should emit diagnostics related to project loading into the VS Code Problems view.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.alireDiagnostics": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Controls whether or not the Ada Language Server should emit diagnostics related to alire into the VS Code Problems view.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.sourceInfoDiagnostics": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Controls whether or not the Ada Language Server should emit source information diagnostics (e.g: for opened files that do not belong to the loaded project tree).\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.adaFileDiagnostics": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Controls whether or not the Ada Language Server should emit diagnostics related to the edition of Ada files into the VS Code Problems view.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.gprFileDiagnostics": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Controls whether or not the Ada Language Server should emit diagnostics related to the edition of GPR files into the VS Code Problems view.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.enableIndexing": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Controls whether the Ada Language Server should index the source files immediately after loading a project.\n\nIf set to false, indexing will be deferred to the time when an action requiring the index is first performed, e.g. hovering over a referenced entity to get its documentation.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.followSymlinks": {
+            "scope": "window",
+            "enum": [
+                true,
+                false,
+                null
+            ],
+            "enumItemLabels": [
+                null,
+                null,
+                "Provided by .als.json (default: true)"
+            ],
+            "markdownEnumDescriptions": [
+                "true",
+                "false",
+                "Provided by [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) if it exists at the workspace root, otherwise defaults to `true`."
+            ],
+            "default": null,
+            "markdownDescription": "Controls the Ada Language Server normalizes the file paths received from the client.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`."
+        },
+        "ada.trace.server": {
+            "scope": "window",
+            "type": "string",
+            "enum": [
+                "off",
+                "messages",
+                "verbose"
+            ],
+            "enumDescriptions": [
+                "No traces are emitted.",
+                "Brief traces are emitted for each request sent and each response received.",
+                "Verbose traces are emitted for each request sent and each response received, including the message content."
+            ],
+            "default": "off",
+            "markdownDescription": "Traces the communication between VS Code and the Ada language server in the 'Ada Language Server' Output view."
+        },
+        "gpr.trace.server": {
+            "scope": "window",
+            "type": "string",
+            "enum": [
+                "off",
+                "messages",
+                "verbose"
+            ],
+            "enumDescriptions": [
+                "No traces are emitted.",
+                "Brief traces are emitted for each request sent and each response received.",
+                "Verbose traces are emitted for each request sent and each response received, including the message content."
+            ],
+            "default": "off",
+            "markdownDescription": "Traces the communication between VS Code and the GPR language server in the 'GPR Language Server' Output view."
+        },
+        "ada.logThreshold": {
+            "scope": "window",
+            "type": "integer",
+            "default": 10,
+            "markdownDescription": "Controls the maximum number of trace files preserved in the ALS log directory (which defaults to `~/.als`). When this threshold is reached, old trace files get deleted automatically. The default number of preserved trace files is `10`.\n\nIf not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `10`."
+        }
+    }
+}

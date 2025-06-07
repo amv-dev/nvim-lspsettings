@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `asm_lsp`",
+    "properties": {
+        "default_config": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Config"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "project": {
+            "type": [
+                "array",
+                "null"
+            ],
+            "items": {
+                "$ref": "#/definitions/ProjectConfig"
+            }
+        }
+    }
+}

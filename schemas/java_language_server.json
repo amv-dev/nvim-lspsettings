@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "LSP settings for `java_language_server`",
+    "properties": {
+        "java.home": {
+            "type": "string",
+            "description": "Absolute path to your Java home directory"
+        },
+        "java.classPath": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Relative paths from workspace root to .jar files, .zip files, or folders that should be included in the Java class path"
+        },
+        "java.docPath": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Relative paths from workspace root to .jar files or .zip files containing source code, or to folders that should be included in the Java doc path"
+        },
+        "java.externalDependencies": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "pattern": "^[^:]+:[^:]+:[^:]+(:[^:]+:[^:]+)?$"
+            },
+            "description": "External dependencies of the form groupId:artifactId:version or groupId:artifactId:packaging:version:scope"
+        },
+        "java.testMethod": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Command to run one test method, for example [\"mvn\", \"test\", \"-Dtest=${class}#${method}\""
+        },
+        "java.debugTestMethod": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Command to debug one test method, for example [\"mvn\", \"test\", \"-Dmaven.surefire.debug\", \"-Dtest=${class}#${method}\". The test should start paused, listening for the debugger on port 5005."
+        },
+        "java.testClass": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Command to run all tests in a class, for example [\"mvn\", \"test\", \"-Dtest=${class}\""
+        },
+        "java.addExports": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "List of modules to allow access to, for example [\"jdk.compiler/com.sun.tools.javac.api\"]"
+        },
+        "java.trace.server": {
+            "scope": "window",
+            "type": "string",
+            "enum": [
+                "off",
+                "messages",
+                "verbose"
+            ],
+            "default": "off",
+            "description": "Traces the communication between VSCode and the language server."
+        }
+    }
+}
