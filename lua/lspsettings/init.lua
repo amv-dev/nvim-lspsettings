@@ -4,6 +4,12 @@ local Schemas = require("lspsettings.schemas")
 
 local M = {}
 
+M.build = function()
+    local schemas = Schemas:new()
+    schemas:scan()
+    schemas:save()
+end
+
 --- Setup to read from a settings file.
 ---@param opts lspsettings.types.config
 M.setup = function(opts)
@@ -36,8 +42,7 @@ M.setup = function(opts)
         end
     })
 
-    local schemas = Schemas:new()
-    schemas:load()
+    local schemas = Schemas.load()
     schemas:apply()
 end
 
