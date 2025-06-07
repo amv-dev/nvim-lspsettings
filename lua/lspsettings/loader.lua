@@ -1,7 +1,7 @@
 --- Used for loading LSP settings from each JSON configuration file
 --- Automatically merges all the plain configs into a single nested table
---- @class Json
-local JsonLoader = {
+--- @class JsonLoader
+JsonLoader = {
     --- @type Config?
     config = nil,
 }
@@ -9,7 +9,7 @@ local JsonLoader = {
 JsonLoader.__index = JsonLoader
 
 --- @param config Config
---- @return Json
+--- @return JsonLoader
 function JsonLoader:new(config)
     local o = {
         config = config,
