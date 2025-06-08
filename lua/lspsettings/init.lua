@@ -24,21 +24,22 @@ M.setup = function(opts)
         config.on_init(server_name, settings)
     end
 
-    local patterns = vim.fn.map(
-        config.paths,
-        function(_, path)
-            return vim.fs.joinpath(path, "*.json")
-        end
-    )
-
-    vim.api.nvim_create_autocmd("BufWrite", {
-        pattern = patterns,
+    vim.api.nvim_create_autocmd("BufWritePost", {
+        pattern = "*.json",
         callback = function(event_data)
-            local file = event_data.file
-            local fname = vim.fs.basename(file)
-            local server_name = fname:sub(1, -6)
-            local settings = loader:load(server_name)
-            config.on_update(server_name, settings)
+            local full_path = event_data.match
+            local relative_path = event_data.file
+            local fname = vim.fs.basename(relative_path)
+
+            for _, path in ipairs(config.paths) do
+                local file_path = vim.fs.joinpath(path, fname)
+                if string.match(full_path, file_path .. "$") then
+                    local server_name = fname:sub(1, -6)
+                    local settings = loader:load(server_name)
+                    config.on_update(server_name, settings)
+                    break
+                end
+            end
         end
     })
 

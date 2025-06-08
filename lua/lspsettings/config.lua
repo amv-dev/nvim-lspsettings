@@ -16,7 +16,12 @@ Config = {
     end,
     on_update = function(server_name, settings)
         vim.lsp.config(server_name, { settings = settings })
-        vim.cmd.LspRestart(server_name)
+
+        local servers = vim.lsp.get_clients({ name = server_name })
+
+        if #servers > 0 then
+            vim.cmd.LspRestart(server_name)
+        end
     end,
 }
 
