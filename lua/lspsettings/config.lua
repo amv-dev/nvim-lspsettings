@@ -10,7 +10,6 @@ Config = {
         ".nlsp-settings",
         ".vim",
     },
-    auto_restart = true,
     on_init = function(server_name, settings)
         vim.lsp.config(server_name, { settings = settings })
     end,
