@@ -3,6 +3,7 @@
 import requests
 import logging
 import json
+import os
 
 from typing import Any, Callable, Dict
 
@@ -91,5 +92,6 @@ if __name__ == "__main__":
         schema = process_schema(server_name, full_schema)
 
         logger.info(f"Saving schema for `{server_name}`...")
-        with open(f"{server_name}.json", "w") as f:
+
+        with open(os.path.join("schemas", f"{server_name}.json"), "w") as f:
             json.dump(schema, f, indent=4)
