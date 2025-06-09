@@ -22,23 +22,24 @@ function Schemas.default_path()
 end
 
 --- @param path string?
-function Schemas.load(path)
+--- @param force boolean?
+function Schemas.load(path, force)
     path = path or Schemas.default_path()
+    force = force or false
 
-    if vim.fn.filereadable(path) == 0 then
+    if vim.fn.filereadable(path) == 0 or force then
         local schemas = Schemas:new()
         schemas:scan()
-        schemas:save(path)
         return schemas
     end
 
-    local schemas = Schemas:new()
     local f = loadfile(path)
 
     if not f then
-        return schemas
+        return Schemas.load(path, true)
     end
 
+    local schemas = Schemas:new()
     schemas.schemas = f()
     return schemas
 end

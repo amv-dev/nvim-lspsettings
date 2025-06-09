@@ -21,7 +21,6 @@ This plugin allowes you to customize LSP settings in `neovim` for each your proj
     dependencies = {
         "neovim/nvim-lspconfig",
     },
-    build = function() require("lspsettings").build() end,
     opts = {},
     event = "BufRead",
 }
