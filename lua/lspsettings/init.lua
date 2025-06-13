@@ -31,10 +31,18 @@ M.setup = function(opts)
             local relative_path = event_data.file
             local fname = vim.fs.basename(relative_path)
 
+            local server_name = fname:sub(1, -6)
+            if not vim.lsp.config[server_name] then
+                return
+            end
+
+            -- check if file is really in config paths
             for _, path in ipairs(config.paths) do
                 local file_path = vim.fs.joinpath(path, fname)
-                if string.match(full_path, file_path .. "$") then
-                    local server_name = fname:sub(1, -6)
+                local file_path_pattern = string.gsub(file_path, "%.", "%%.") .. "$"
+
+                if string.match(full_path, file_path_pattern) then
+                    -- Path found. Reloading settings...
                     local settings = loader:load(server_name)
                     config.on_settings(server_name, settings)
                     break
