@@ -1,14 +1,13 @@
 # nvim-lspsettings
 
-## What's this plugin about
-
 This plugin allowes you to customize LSP settings in `neovim` for each your project and globally in JSON format similar to VSCode.
 
 ## What this plugin offers you
 1. Global LSP configuration
 2. Customize configuration for LSPs for each your project similar to VSCode and `COC` / `coc-settings.json`
-2. Autocompletion with description for most popular LSPs settings.
-3. Compatibility with `VSCode` settings format.
+3. Autocompletion with description for most popular LSPs settings.
+4. Compatibility with `VSCode` settings format.
+5. Easy & flexible configuration
 
 ## Requirements
 * [Neovim v0.11.2 or higher](https://github.com/neovim/neovim/releases)
@@ -64,7 +63,7 @@ This plugin allowes you to customize LSP settings in `neovim` for each your proj
 ```
 
 ## Configuration with custom callback 
-Here is an example with custom `on_settings` callback, which call default `on_settings` and then show notification.
+Here is an example with custom `on_settings` callback, which calls default `on_settings` first and then shows notification.
 ```lua
 {
     on_settings = function(server_name, settings)
@@ -96,5 +95,5 @@ I experienced several problems I want to fix:
 3. IMHO plugin is overcomplicated and hard to maintain for others due to lot of comments on japanese.
 
 # TODO
-[ ] Neovim docs
-[ ] Neovim commands
+* [ ] Neovim docs
+* [ ] Neovim commands
