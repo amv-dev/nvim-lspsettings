@@ -42,20 +42,21 @@ This plugin allowes you to customize LSP settings in `neovim` for each your proj
         ".vim",
     },
 
-    -- If settings found for the server, this function will be fired at startup
-    on_init = function(server_name, settings)
-        vim.lsp.config(server_name, { settings = settings })
-    end,
+    -- This function will fire on LSP start or on settings file change
+    on_settings = function(server_name, settings)
+        if vim.deep_equal(vim.lsp.config[server_name].settings, settings) then
+            -- Nothing changed, just quit
+            return
+        end
 
-    -- If settings were changed, this function will be fired
-    on_update = function(server_name, settings)
         vim.lsp.config(server_name, { settings = settings })
 
         local servers = vim.lsp.get_clients({ name = server_name })
 
-        if #servers > 0 then
-            vim.cmd.LspRestart(server_name)
-        end
+        if #servers == 0 then return end
+
+        -- restart server if it's already running
+        vim.cmd.LspRestart(server_name)
     end,
 }
 ```

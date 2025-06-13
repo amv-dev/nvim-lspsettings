@@ -21,7 +21,7 @@ M.setup = function(opts)
 
     for _, server_name in ipairs(servers) do
         local settings = loader:load(server_name)
-        config.on_init(server_name, settings)
+        config.on_settings(server_name, settings)
     end
 
     vim.api.nvim_create_autocmd("BufWritePost", {
@@ -36,7 +36,7 @@ M.setup = function(opts)
                 if string.match(full_path, file_path .. "$") then
                     local server_name = fname:sub(1, -6)
                     local settings = loader:load(server_name)
-                    config.on_update(server_name, settings)
+                    config.on_settings(server_name, settings)
                     break
                 end
             end
