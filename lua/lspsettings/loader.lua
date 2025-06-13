@@ -91,7 +91,7 @@ end
 --- @param server_name string
 --- @return table
 function JsonLoader:load(server_name)
-    local datas = {}
+    local settings = {}
 
     -- reading each config
     for _, path in ipairs(self:list_server_configs(server_name)) do
@@ -99,14 +99,11 @@ function JsonLoader:load(server_name)
         local success, data = pcall(vim.json.decode, jsoned)
 
         if success then
-            table.insert(datas, data)
+            settings = vim.tbl_extend("force", settings, data)
         else
             vim.notify("Unable to load LSP settings at `" .. path .. "`: " .. vim.inspect(data), vim.log.levels.WARN)
         end
     end
-
-    -- merging all the configs into a single plain table
-    local settings = vim.tbl_extend("force", {}, {}, unpack(datas))
 
     -- converting plain table into nested
     local nested = to_nested(settings)
