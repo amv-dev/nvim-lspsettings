@@ -1,19 +1,21 @@
-# nvim-lspsettings. What's this plugin about
+# nvim-lspsettings
+
+## What's this plugin about
 
 This plugin allowes you to customize LSP settings in `neovim` for each your project and globally in JSON format similar to VSCode.
 
-# What this plugin offers you
+## What this plugin offers you
 1. Global LSP configuration
 2. Customize configuration for LSPs for each your project similar to VSCode and `COC` / `coc-settings.json`
 2. Autocompletion with description for most popular LSPs settings.
 3. Compatibility with `VSCode` settings format.
 
-# Requirements
+## Requirements
 * [Neovim v0.11.2 or higher](https://github.com/neovim/neovim/releases)
 * [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/)
 * `jsonls` (optional, for settings autocompletion)
 
-# Installation (Lazy nvim)
+## Installation (Lazy nvim)
 
 ```lua
 {
@@ -26,7 +28,7 @@ This plugin allowes you to customize LSP settings in `neovim` for each your proj
 }
 ```
 
-# Default plugin configuration options
+## Default plugin configuration options
 ```lua
 {
     -- Paths where JSON cofiguration will be searched
@@ -61,8 +63,23 @@ This plugin allowes you to customize LSP settings in `neovim` for each your proj
 }
 ```
 
-# Settings example
-## .vim/rust_analyzer.json
+## Configuration with custom callback 
+Here is an example with custom `on_settings` callback, which call default `on_settings` and then show notification.
+```lua
+{
+    on_settings = function(server_name, settings)
+        local Config = require('lspsettings.config')
+        Config.on_settings(server_name, settings) -- default callback
+
+        vim.notify("Settings changed")
+    end,
+}
+```
+Of course, you can totally rewrite `on_settings` on your own without calling default implementation.
+
+## LSP Settings example
+
+`.vim/rust_analyzer.json`
 ```json
 {
     "rust-analyzer.checkOnSave": true,
@@ -70,7 +87,7 @@ This plugin allowes you to customize LSP settings in `neovim` for each your proj
 }
 ```
 
-# Etc
+# Other information
 This plugin is heavily inspired by [tamago324/nlsp-settings.nvim](https://github.com/tamago324/nlsp-settings.nvim) work. Unfortunately, it seems like it is no longer maintained.
 
 I experienced several problems I want to fix:
@@ -79,5 +96,5 @@ I experienced several problems I want to fix:
 3. IMHO plugin is overcomplicated and hard to maintain for others due to lot of comments on japanese.
 
 # TODO
-1. Neovim docs
-2. Neovim commands
+[ ] Neovim docs
+[ ] Neovim commands
