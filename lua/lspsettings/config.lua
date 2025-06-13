@@ -30,6 +30,7 @@ Config = {
 Config.__index = Config
 
 --- Creates default config
+--- If `opts` provided, then extends default config with given options
 --- @param opts lspsettings.types.config?
 --- @return Config
 function Config:new(opts)

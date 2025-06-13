@@ -44,6 +44,7 @@ function Schemas.load(path, force)
     return schemas
 end
 
+--- Saves JSONLS schemas list into a `lua`-file
 --- @param path string?
 function Schemas:save(path)
     path = path or Schemas.default_path()

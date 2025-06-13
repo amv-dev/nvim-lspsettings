@@ -8,6 +8,7 @@ JsonLoader = {
 
 JsonLoader.__index = JsonLoader
 
+--- Create new instance of `JsonLoader`
 --- @param config Config
 --- @return JsonLoader
 function JsonLoader:new(config)
@@ -20,6 +21,7 @@ function JsonLoader:new(config)
     return o
 end
 
+--- Parses `key` and sets `value` with this key into `target` table as a nested value
 --- @param key string
 --- @param value any
 --- @param target table

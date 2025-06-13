@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+"""
+This script loads all available LSP configuration schemas and produces schemas for JSONLS autocompletion
+"""
 import requests
 import logging
 import json
@@ -16,10 +19,16 @@ def download(url: str) -> Any:
 
 
 def load_schemas_list() -> Dict[str, str]:
+    """
+    Loads LSP schemas list with tons of LSPs
+    """
     return download(LSP_LIST_URL)
 
 
 def load_lsp_schema(url: str) -> Any:
+    """
+    Loads particular LSP schema from `url`
+    """
     return download(url)
 
 
@@ -35,6 +44,9 @@ def project_properties_parser(full_schema: Any) -> Any:
 
 
 def default_parser(full_schema: Any) -> Any:
+    """
+    Default properties parser. Merges all the `contributes.configuration[*].properties` into a single dict
+    """
     ctrb = full_schema["contributes"]
     confs = ctrb["configuration"]
 
@@ -53,6 +65,9 @@ def default_parser(full_schema: Any) -> Any:
 
 
 def get_parser(_server_name, full_schema) -> Callable:
+    """
+    Decides which parser need to extract properties from original schema
+    """
     if "contributes" in full_schema:
         return default_parser
 
@@ -69,7 +84,14 @@ def get_parser(_server_name, full_schema) -> Callable:
 
 
 def process_schema(server_name: str, full_schema: Any) -> Any:
+    """
+    Processes schema for particular LSP and returns configuration item for JSONLS
+    """
+
+    # Some LSP has non-unified schema. So first must get right schema parser
     parser = get_parser(server_name, full_schema)
+
+    # Getting JSONLS props from the schema
     props = parser(full_schema)
 
     return {
@@ -82,8 +104,10 @@ def process_schema(server_name: str, full_schema: Any) -> Any:
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
+    # Loading all schemas list
     urls = load_schemas_list()
 
+    # Loading & processing each schema
     for server_name in urls:
         logger.info(f"Processing `{server_name}` schema...")
         full_schema = load_lsp_schema(urls[server_name])
@@ -92,6 +116,5 @@ if __name__ == "__main__":
         schema = process_schema(server_name, full_schema)
 
         logger.info(f"Saving schema for `{server_name}`...")
-
         with open(os.path.join("schemas", f"{server_name}.json"), "w") as f:
             json.dump(schema, f, indent=4)
