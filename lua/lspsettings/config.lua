@@ -27,14 +27,14 @@ Config = {
 Config.__index = Config
 
 --- Creates default config
---- @param opts lspsettings.types.config
+--- @param opts lspsettings.types.config?
 --- @return Config
 function Config:new(opts)
     local o = {}
 
     setmetatable(o, self)
 
-    if opts then o.extend(opts) end
+    if opts then o:extend(opts) end
 
     return o
 end
