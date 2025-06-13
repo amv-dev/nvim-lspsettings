@@ -26,7 +26,7 @@ end
 --- @param value any
 --- @param target table
 local function set_key(key, value, target)
-    local index = key:find('[\\.]')
+    local index = key:find('%.')
     if index == nil then
         -- final level
         target[key] = value
@@ -72,7 +72,7 @@ function JsonLoader:list_configured_servers()
     return vim.tbl_keys(result)
 end
 
---- Lists all available server config in order they must be merged
+--- Lists all available server configs in order they must be merged
 --- @param server_name string
 --- @return string[]
 function JsonLoader:list_server_configs(server_name)
