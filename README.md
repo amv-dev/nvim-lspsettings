@@ -86,6 +86,22 @@ Of course, you can totally rewrite `on_settings` on your own without calling def
 }
 ```
 
+## Commands
+
+### LspSettings
+Takes 0, 1 or 2 arguments
+
+If no arguments provided, then opens local settings file for LSP for the current buffer
+
+Each argument may be server name, path from config or path index from config. Example:
+```
+LspSettings rust_analyzer # opens local settings for `rust_analyzer`
+LspSettings 0 rust_analyzer # opens global settings for `rust_analyzer`
+LspSettings 0 # opens global settings for current buffer server
+LspSettings global # same
+LspSettings # opens local settings for current buffer server
+```
+
 # Other information
 This plugin is heavily inspired by [tamago324/nlsp-settings.nvim](https://github.com/tamago324/nlsp-settings.nvim) work. Unfortunately, it seems like it is no longer maintained.
 
