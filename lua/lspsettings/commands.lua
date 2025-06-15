@@ -1,3 +1,4 @@
+--- LspSettings command
 --- @param args vim.api.keyset.create_user_command.command_args
 local function lsp_settings(args)
     local M = require("lspsettings")
@@ -11,7 +12,7 @@ local function lsp_settings(args)
         end
 
         local index = tonumber(arg)
-        if arg == "global" then index = 0 end
+        if arg == "global" then index = 1 end
         if index then
             if M.config.paths[index] then
                 target.path = M.config.paths[index]
@@ -31,17 +32,44 @@ local function lsp_settings(args)
     M.open_settings_file(osf_args)
 end
 
-local function install()
+--- Autocompletion for `LspSettings` arguments
+---@diagnostic disable-next-line: unused-local
+local function lsp_settings_cmp(_ArgLead, _CmdLine, _CursorPos)
+    local M = require("lspsettings")
+
+    local variants = {
+        "global",
+    }
+
+    local client = vim.lsp.get_clients({ bufnr = 0 })[1]
+    if client then
+        table.insert(variants, client.name)
+    end
+
+    for i, _ in ipairs(M.config.paths) do
+        table.insert(variants, tostring(i))
+    end
+
+    -- FIXME: need to find a correct way to list all configured LSPs
+    for server_name in pairs(vim.lsp._enabled_configs) do
+        table.insert(variants, server_name)
+    end
+
+    return variants
+end
+
+local function define()
     vim.api.nvim_create_user_command(
         "LspSettings",
         lsp_settings,
         {
             nargs = '*',
             desc = "Open LSP settings file",
+            complete = lsp_settings_cmp,
         }
     )
 end
 
 return {
-    install = install,
+    define = define,
 }

@@ -120,7 +120,7 @@ M.setup = function(opts)
     local schemas = Schemas.load()
     schemas:apply()
 
-    commands.install()
+    commands.define()
 end
 
 return M
