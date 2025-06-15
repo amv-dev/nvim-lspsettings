@@ -1657,6 +1657,11 @@
                 }
             ]
         },
+        "rust-analyzer.workspace.symbol.search.excludeImports": {
+            "markdownDescription": "Exclude imports from symbol search.",
+            "default": false,
+            "type": "boolean"
+        },
         "rust-analyzer.workspace.symbol.search.kind": {
             "markdownDescription": "Workspace symbol search kind.",
             "default": "only_types",

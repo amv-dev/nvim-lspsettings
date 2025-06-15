@@ -51,20 +51,10 @@
             ],
             "markdownDescription": "%configuration.splitEditors.layout.right%"
         },
-        "vue.codeActions.enabled": {
-            "type": "boolean",
-            "default": true,
-            "markdownDescription": "%configuration.codeActions.enabled%"
-        },
         "vue.codeActions.askNewComponentName": {
             "type": "boolean",
             "default": true,
             "markdownDescription": "%configuration.codeActions.askNewComponentName%"
-        },
-        "vue.codeLens.enabled": {
-            "type": "boolean",
-            "default": true,
-            "markdownDescription": "%configuration.codeLens.enabled%"
         },
         "vue.complete.casing.tags": {
             "type": "string",

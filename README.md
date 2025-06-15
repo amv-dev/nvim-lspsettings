@@ -112,4 +112,4 @@ I experienced several problems I want to fix:
 
 # TODO
 * [ ] Neovim docs
-* [ ] Neovim commands
+* [x] Neovim commands
