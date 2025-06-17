@@ -45,7 +45,7 @@ This plugin allowes you to customize LSP settings in `neovim` for each your proj
 
     -- This function will fire on LSP start or on settings file change
     on_settings = function(server_name, settings)
-        if vim.deep_equal(vim.lsp.config[server_name].settings, settings) then
+        if vim.lsp.config[server_name] and vim.deep_equal(vim.lsp.config[server_name].settings, settings) then
             -- Nothing changed, just quit
             return
         end

@@ -11,7 +11,7 @@ Config = {
         ".vim",
     },
     on_settings = function(server_name, settings)
-        if vim.deep_equal(vim.lsp.config[server_name].settings, settings) then
+        if vim.lsp.config[server_name] and vim.deep_equal(vim.lsp.config[server_name].settings, settings) then
             -- Nothing changed, just quit
             return
         end
