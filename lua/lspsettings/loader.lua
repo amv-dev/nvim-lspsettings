@@ -88,6 +88,7 @@ function JsonLoader:list_server_configs(server_name)
     return result
 end
 
+--- Loads settings for particular LSP `server_name` from all the paths and merges together
 --- @param server_name string
 --- @return table
 function JsonLoader:load(server_name)
@@ -96,7 +97,8 @@ function JsonLoader:load(server_name)
     -- reading each config
     for _, path in ipairs(self:list_server_configs(server_name)) do
         local jsoned = table.concat(vim.fn.readfile(path))
-        local success, data = pcall(vim.json.decode, jsoned)
+        local opts = { luanil = { object = true, array = true } }
+        local success, data = pcall(vim.json.decode, jsoned, opts)
 
         if success then
             settings = vim.tbl_extend("force", settings, data)
