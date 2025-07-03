@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 def download(url: str) -> Any:
-    return requests.get(url).json()
+    return requests.get(url, timeout=10).json()
 
 
 def load_schemas_list() -> Dict[str, str]:

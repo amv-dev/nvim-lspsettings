@@ -163,7 +163,10 @@
                         "language": "wgsl"
                     },
                     {
-                        "pattern": "**/*.wgsl"
+                        "language": "wesl"
+                    },
+                    {
+                        "pattern": "**/wesl.toml"
                     },
                     {
                         "scheme": "output",
@@ -213,7 +216,7 @@
         },
         "wgsl-analyzer.trace.extension": {
             "description": "Enable logging of VS Code extensions itself.",
-            "markdownDeprecationMessage": "Log level is now controlled by the [Developer: Set Log Level...](command:workbench.action.setLogLevel) command. You can set the log level for the current session and also the default log level from there. This is also available by clicking the gear icon on the OUTPUT tab when WGSL Analyzer Client is visible or by passing the --log wgsl-analyzer.wgsl-analyzer:debug parameter to VS Code.",
+            "markdownDeprecationMessage": "Log level is now controlled by the [Developer: Set Log Level...](command:workbench.action.setLogLevel) command. You can set the log level for the current session and also the default log level from there. This is also available by clicking the gear icon on the OUTPUT tab when wgsl-analyzer Client is visible or by passing the --log wgsl-analyzer.wgsl-analyzer:debug parameter to VS Code.",
             "type": "boolean",
             "default": false
         },
@@ -410,7 +413,7 @@
             "type": "boolean"
         },
         "wgsl-analyzer.hover.actions.enable": {
-            "markdownDescription": "Whether to show HoverActions in WGSL files.",
+            "markdownDescription": "Whether to show hover actions.",
             "default": true,
             "type": "boolean"
         },
@@ -778,7 +781,7 @@
             "type": "boolean"
         },
         "wgsl-analyzer.lens.enable": {
-            "markdownDescription": "Whether to show CodeLens in WGSL files.",
+            "markdownDescription": "Whether to show CodeLens.",
             "default": true,
             "type": "boolean"
         },
@@ -826,7 +829,7 @@
             "type": "boolean"
         },
         "wgsl-analyzer.linkedProjects": {
-            "markdownDescription": "Disable project auto-discovery in favor of explicitly specified set of projects.\n\nElements must be paths pointing to `Cargo.toml`, `wgsl-project.json`, `.rs` files (which will be treated as standalone files) or JSON objects in `wgsl-project.json` format.",
+            "markdownDescription": "Disable project auto-discovery in favor of explicitly specified set of projects.\n\nElements must be paths pointing to `wesl.toml`, `.wgsl` files, or `.wesl` files (which will be treated as standalone files).",
             "default": [],
             "type": "array",
             "items": {
@@ -906,7 +909,7 @@
             "type": "boolean"
         },
         "wgsl-analyzer.semanticHighlighting.doc.comment.inject.enable": {
-            "markdownDescription": "Inject additional highlighting into doc comments.\n\nWhen enabled, wgsl-analyzer will highlight WGSL source in doc comments as well as intra doc links.",
+            "markdownDescription": "Inject additional highlighting into doc comments.\n\nWhen enabled, wgsl-analyzer will highlight WGSL/WESL source in doc comments as well as intra-doc links.",
             "default": true,
             "type": "boolean"
         },

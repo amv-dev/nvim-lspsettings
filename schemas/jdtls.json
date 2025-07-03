@@ -943,7 +943,12 @@
                     "renameFileToType",
                     "organizeImports",
                     "renameUnusedLocalVariables",
-                    "useSwitchForInstanceofPattern"
+                    "useSwitchForInstanceofPattern",
+                    "redundantComparisonStatement",
+                    "redundantFallingThroughBlockEnd",
+                    "redundantIfCondition",
+                    "redundantModifiers",
+                    "redundantSuperCall"
                 ]
             },
             "default": [
