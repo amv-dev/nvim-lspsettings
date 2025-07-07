@@ -1,5 +1,6 @@
 --- @class Config
 Config = {
+    json5 = true,
     paths = {
         vim.fs.joinpath(vim.fn.stdpath('config'), "lspsettings"),
         -- compatibility with `nlsp-settings` plugin
