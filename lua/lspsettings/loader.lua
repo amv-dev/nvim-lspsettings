@@ -79,9 +79,16 @@ function JsonLoader:list_server_configs(server_name)
     local result = {}
     local paths = self.config.paths
     for _, path in ipairs(paths) do
-        path = vim.fs.joinpath(path, server_name .. ".json")
-        if vim.fn.filereadable(path) == 1 then
-            table.insert(result, path)
+        local path1 = vim.fs.joinpath(path, server_name .. ".json")
+        if vim.fn.filereadable(path1) == 1 then
+            table.insert(result, path1)
+        end
+
+        if self.config.json5 then
+            local path2 = vim.fs.joinpath(path, server_name .. ".json5")
+            if vim.fn.filereadable(path2) == 1 then
+                table.insert(result, path2)
+            end
         end
     end
 
@@ -92,18 +99,25 @@ end
 --- @param server_name string
 --- @return table
 function JsonLoader:load(server_name)
+    local decode = vim.json.decode
+    if self.config.json5 then
+        decode = require("lspsettings.json5").decode
+    end
+
     local settings = {}
 
     -- reading each config
     for _, path in ipairs(self:list_server_configs(server_name)) do
-        local jsoned = table.concat(vim.fn.readfile(path))
-        local opts = { luanil = { object = true, array = true } }
-        local success, data = pcall(vim.json.decode, jsoned, opts)
+        local jsoned = table.concat(vim.fn.readfile(path), "\n")
+        if jsoned ~= "" then
+            local opts = { luanil = { object = true, array = true } }
+            local success, data = pcall(decode, jsoned, opts)
 
-        if success then
-            settings = vim.tbl_extend("force", settings, data)
-        else
-            vim.notify("Unable to load LSP settings at `" .. path .. "`: " .. vim.inspect(data), vim.log.levels.WARN)
+            if success then
+                settings = vim.tbl_extend("force", settings, data)
+            else
+                vim.notify("Unable to load LSP settings at `" .. path .. "`: invalid JSON", vim.log.levels.WARN)
+            end
         end
     end
 
