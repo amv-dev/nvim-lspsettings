@@ -84,9 +84,14 @@ M.setup = function(opts)
         M.config.on_settings(server_name, settings)
     end
 
+    local pattern = { "*.json" }
+    if M.config.json5 then
+        pattern = { "*.json", "*.json5", "*.jsonc" }
+    end
+
     -- Bind callback to watch changes in configuration files
     vim.api.nvim_create_autocmd("BufWritePost", {
-        pattern = "*.json",
+        pattern = pattern,
         callback = function(event_data)
             local full_path = event_data.match
             local relative_path = event_data.file

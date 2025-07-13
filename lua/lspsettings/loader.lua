@@ -78,16 +78,19 @@ end
 function JsonLoader:list_server_configs(server_name)
     local result = {}
     local paths = self.config.paths
-    for _, path in ipairs(paths) do
-        local path1 = vim.fs.joinpath(path, server_name .. ".json")
-        if vim.fn.filereadable(path1) == 1 then
-            table.insert(result, path1)
-        end
+    for _, dir_path in ipairs(paths) do
+        local extensions = { ".json" }
 
         if self.config.json5 then
-            local path2 = vim.fs.joinpath(path, server_name .. ".json5")
-            if vim.fn.filereadable(path2) == 1 then
-                table.insert(result, path2)
+            table.insert(extensions, ".json5")
+            table.insert(extensions, ".jsonc")
+        end
+
+        for _, extension in ipairs(extensions) do
+            local file_path = vim.fs.joinpath(dir_path, server_name .. extension)
+            if vim.fn.filereadable(file_path) == 1 then
+                table.insert(result, file_path)
+                break
             end
         end
     end
