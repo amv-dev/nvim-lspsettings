@@ -67,7 +67,25 @@ M.open_settings_file = function(args)
     if not path then return end
 
     vim.fn.mkdir(path, "p")
-    vim.cmd.edit(vim.fs.joinpath(path, server_name .. ".json"))
+
+    local extensions = { "json" }
+    if M.config.json5 then
+        table.insert(extensions, 1, "json5")
+    end
+
+    local file_name = server_name .. "." .. extensions[1]
+
+    -- Trying to find existing file
+    for _, ext in ipairs(extensions) do
+        local fname = server_name .. "." .. ext
+        local file_path = vim.fs.joinpath(path, fname)
+        if vim.fn.filereadable(file_path) == 1 then
+            file_name = fname
+            break
+        end
+    end
+
+    vim.cmd.edit(vim.fs.joinpath(path, file_name))
 end
 
 --- Setup to read from a settings file.
