@@ -36,7 +36,9 @@ local function set_key(key, value, target)
     local head = key:sub(1, index - 1)
     local tail = key:sub(index + 1)
 
-    target[head] = target[head] or {}
+    if type(target[head]) ~= "table" then
+        target[head] = {}
+    end
 
     set_key(tail, value, target[head])
 end
