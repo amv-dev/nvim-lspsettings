@@ -1,5 +1,6 @@
 --- @class Config
 Config = {
+    json5 = true,
     paths = {
         vim.fs.joinpath(vim.fn.stdpath('config'), "lspsettings"),
         -- compatibility with `nlsp-settings` plugin
@@ -56,6 +57,22 @@ function Config:extend(opts)
     if type(self.paths) == "string" then
         self.paths = { self.paths }
     end
+end
+
+--- Returns supported settings files extensions
+--- @param prefix? string Add prefix to all extensions
+--- @return string[]
+function Config:extensions(prefix)
+    local extensions = { "json" }
+
+    if self.json5 then
+        extensions = { "json5", "jsonc", "json" }
+    end
+
+    if prefix then
+        return vim.fn.map(extensions, function(_, ext) return prefix .. ext end)
+    end
+    return extensions
 end
 
 return Config

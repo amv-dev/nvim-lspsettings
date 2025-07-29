@@ -1,4 +1,5 @@
 ---@class lspsettings.types.config
+---@field json5 boolean? default true. Experimental
 ---@field paths string|string[]?
 ---@field on_settings fun(server_name: string, settings: table): nil?
 

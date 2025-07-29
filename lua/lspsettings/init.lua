@@ -67,7 +67,20 @@ M.open_settings_file = function(args)
     if not path then return end
 
     vim.fn.mkdir(path, "p")
-    vim.cmd.edit(vim.fs.joinpath(path, server_name .. ".json"))
+
+    local file_names = M.config:extensions(server_name .. ".")
+    local file_name = file_names[1]
+
+    -- Trying to find existing file
+    for _, fname in ipairs(file_names) do
+        local file_path = vim.fs.joinpath(path, fname)
+        if vim.fn.filereadable(file_path) == 1 then
+            file_name = fname
+            break
+        end
+    end
+
+    vim.cmd.edit(vim.fs.joinpath(path, file_name))
 end
 
 --- Setup to read from a settings file.
@@ -86,7 +99,7 @@ M.setup = function(opts)
 
     -- Bind callback to watch changes in configuration files
     vim.api.nvim_create_autocmd("BufWritePost", {
-        pattern = "*.json",
+        pattern = M.config:extensions("*."),
         callback = function(event_data)
             local full_path = event_data.match
             local relative_path = event_data.file

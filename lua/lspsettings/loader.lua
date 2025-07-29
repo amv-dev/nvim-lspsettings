@@ -36,7 +36,9 @@ local function set_key(key, value, target)
     local head = key:sub(1, index - 1)
     local tail = key:sub(index + 1)
 
-    target[head] = target[head] or {}
+    if type(target[head]) ~= "table" then
+        target[head] = {}
+    end
 
     set_key(tail, value, target[head])
 end
@@ -59,12 +61,18 @@ end
 --- @return string[]
 function JsonLoader:list_configured_servers()
     local result = {}
+    local extensions = self.config:extensions(".")
 
     for _, dir in ipairs(self.config.paths) do
         for name, type in vim.fs.dir(dir, { follow = true }) do
-            if type == "file" and name:sub(-5) == ".json" then
-                local server_name = name:sub(1, -6)
-                result[server_name] = true
+            if type == "file" then
+                for _, ext in ipairs(extensions) do
+                    if name:sub(-ext:len()) == ext then
+                        local server_name = name:sub(1, -(ext:len() + 1))
+                        result[server_name] = true
+                        break
+                    end
+                end
             end
         end
     end
@@ -78,10 +86,15 @@ end
 function JsonLoader:list_server_configs(server_name)
     local result = {}
     local paths = self.config.paths
-    for _, path in ipairs(paths) do
-        path = vim.fs.joinpath(path, server_name .. ".json")
-        if vim.fn.filereadable(path) == 1 then
-            table.insert(result, path)
+    local fnames = self.config:extensions(server_name .. ".")
+
+    for _, dir_path in ipairs(paths) do
+        for _, fname in ipairs(fnames) do
+            local file_path = vim.fs.joinpath(dir_path, fname)
+            if vim.fn.filereadable(file_path) == 1 then
+                table.insert(result, file_path)
+                break
+            end
         end
     end
 
@@ -92,18 +105,25 @@ end
 --- @param server_name string
 --- @return table
 function JsonLoader:load(server_name)
+    local decode = vim.json.decode
+    if self.config.json5 then
+        decode = require("lspsettings.json5").decode
+    end
+
     local settings = {}
 
     -- reading each config
     for _, path in ipairs(self:list_server_configs(server_name)) do
-        local jsoned = table.concat(vim.fn.readfile(path))
-        local opts = { luanil = { object = true, array = true } }
-        local success, data = pcall(vim.json.decode, jsoned, opts)
+        local jsoned = table.concat(vim.fn.readfile(path), "\n")
+        if jsoned ~= "" then
+            local opts = { luanil = { object = true, array = true } }
+            local success, data = pcall(decode, jsoned, opts)
 
-        if success then
-            settings = vim.tbl_extend("force", settings, data)
-        else
-            vim.notify("Unable to load LSP settings at `" .. path .. "`: " .. vim.inspect(data), vim.log.levels.WARN)
+            if success then
+                settings = vim.tbl_extend("force", settings, data)
+            else
+                vim.notify("Unable to load LSP settings at `" .. path .. "`: invalid JSON", vim.log.levels.WARN)
+            end
         end
     end
 
