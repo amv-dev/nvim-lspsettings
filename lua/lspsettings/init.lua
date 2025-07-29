@@ -105,7 +105,7 @@ M.setup = function(opts)
             local relative_path = event_data.file
             local fname = vim.fs.basename(relative_path)
 
-            local server_name = fname:sub(1, -6)
+            local server_name = fname:gsub("%.json[c5]?$", "")
 
             -- Check that this `server_name` really exists
             if not vim.lsp.config[server_name] then
