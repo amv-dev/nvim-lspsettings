@@ -7,7 +7,7 @@ Schemas.__index = Schemas
 --- @return Schemas
 function Schemas:new()
     local o = {
-        schemas = {}
+        schemas = {},
     }
 
     setmetatable(o, self)
@@ -58,6 +58,7 @@ end
 
 --- Scans `./schemas` directory and forms list of available schemas.
 function Schemas:scan()
+    local extensions = { "json", "json5", "jsonc" }
     local init_lua_path = debug.getinfo(1).source:sub(2)
     local lspsettings_path = vim.fs.dirname(init_lua_path)
     local lua_path = vim.fs.dirname(lspsettings_path)
@@ -73,9 +74,10 @@ function Schemas:scan()
         if type == "file" and name:sub(-5) == ".json" then
             local server_name = name:sub(1, -6)
             local file_path = vim.fs.abspath(vim.fs.joinpath(schemas_path, name))
+            local matches = vim.fn.map(extensions, function(_, ext) return server_name .. "." .. ext end)
 
             self.schemas[server_name] = {
-                fileMatch = { name },
+                fileMatch = matches,
                 url = "/" .. file_path,
             }
         end
@@ -84,11 +86,13 @@ end
 
 --- Applies given schemas list to `jsonls`
 function Schemas:apply()
+    local config = require("lspsettings").config
+    local extensions = config:extensions()
+
     vim.lsp.config('jsonls', {
+        filetypes = extensions,
         settings = {
-            json = {
-                schemas = vim.tbl_values(self.schemas),
-            },
+            json = { schemas = vim.tbl_values(self.schemas) },
         },
     })
 end

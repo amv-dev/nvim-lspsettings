@@ -59,4 +59,20 @@ function Config:extend(opts)
     end
 end
 
+--- Returns supported settings files extensions
+--- @param prefix? string Add prefix to all extensions
+--- @return string[]
+function Config:extensions(prefix)
+    local extensions = { "json" }
+
+    if self.json5 then
+        extensions = { "json5", "jsonc", "json" }
+    end
+
+    if prefix then
+        return vim.fn.map(extensions, function(_, ext) return prefix .. ext end)
+    end
+    return extensions
+end
+
 return Config

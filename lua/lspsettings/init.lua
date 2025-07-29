@@ -68,16 +68,11 @@ M.open_settings_file = function(args)
 
     vim.fn.mkdir(path, "p")
 
-    local extensions = { "json" }
-    if M.config.json5 then
-        table.insert(extensions, 1, "json5")
-    end
-
-    local file_name = server_name .. "." .. extensions[1]
+    local file_names = M.config:extensions(server_name .. ".")
+    local file_name = file_names[1]
 
     -- Trying to find existing file
-    for _, ext in ipairs(extensions) do
-        local fname = server_name .. "." .. ext
+    for _, fname in ipairs(file_names) do
         local file_path = vim.fs.joinpath(path, fname)
         if vim.fn.filereadable(file_path) == 1 then
             file_name = fname
@@ -102,14 +97,9 @@ M.setup = function(opts)
         M.config.on_settings(server_name, settings)
     end
 
-    local pattern = { "*.json" }
-    if M.config.json5 then
-        pattern = { "*.json", "*.json5", "*.jsonc" }
-    end
-
     -- Bind callback to watch changes in configuration files
     vim.api.nvim_create_autocmd("BufWritePost", {
-        pattern = pattern,
+        pattern = M.config:extensions("*."),
         callback = function(event_data)
             local full_path = event_data.match
             local relative_path = event_data.file
